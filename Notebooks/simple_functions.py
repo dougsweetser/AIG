@@ -42,7 +42,21 @@ z = np.linspace(-2, 2)
 plt.plot(z, f(z));
 
 
-# In[ ]:
-
-
-
+# It works. To share:
+# > git status   - what is going on, always RUN
+# > git commit file1 file2 -m "Made it all better."
+# > git push     - to the github repo you go!
+# > git pull     - get the stuff other folks worked on.
+# 
+# To MESS around at little cost
+# > git checkout -b mess_around
+# do your stuff
+# > git commit -a -m "Good work."
+# 
+# If GREAT:
+# > git checkout master
+# > git merge mess_around
+# 
+# If NOT:
+# > git checkout master
+# and ignore that branch.
