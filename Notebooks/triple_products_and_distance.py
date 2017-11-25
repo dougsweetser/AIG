@@ -178,8 +178,11 @@ display(sp.simplify(ppr.t))
 # The trig functions are based on a circle in the plane, while the hyperbolic trig functions start with hyperbolas. The definitions are remarkably similar:
 
 # $$\sin(\alpha) = \frac{e^{i \alpha} - e^{-i \alpha}}{2 i}$$
+
 # $$\cos(\alpha) = \frac{e^{i \alpha} + e^{-i \alpha}}{2 i}$$
+
 # $$\sinh(\alpha) = \frac{e^{\alpha} - e^{-\alpha}}{2}$$
+
 # $$\cosh(\alpha) = \frac{e^{\alpha} + e^{-\alpha}}{2}$$
 
 # The hyperbolic trig functions oddly are "more real", never needing an imaginary factor. The hyperbola of the hyperbolic cosine does touch the unit circle at its minimum, suggesting a solitary link to the trig functions.
