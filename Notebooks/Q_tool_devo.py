@@ -11,7 +11,7 @@
 # 
 # Test driven development was used. The same tests for class QH were used for Q8.  Either class can be used to study quaternions in physics.
 
-# In[9]:
+# In[1]:
 
 
 import IPython
@@ -48,7 +48,7 @@ def sr_gamma_betas(beta_x=0, beta_y=0, beta_z=0):
 
 # Define a class QH to manipulate quaternions as Hamilton would have done it so many years ago. The "qtype" is a little bit of text to leave a trail of breadcrumbs about how a particular quaternion was generated.
 
-# In[10]:
+# In[3]:
 
 
 class QH(object):
@@ -77,13 +77,33 @@ class QH(object):
 
     
     def simple_q(self):
-        """display each terms in a pretty way."""
+        """Display each terms in a pretty way."""
         
-        self.t = sp.simplify(self.t)
-        self.x = sp.simplify(self.x)
-        self.y = sp.simplify(self.y)
-        self.z = sp.simplify(self.z)
-        return
+        t, x, y, z = self.t, self.x, self.y, self.z
+        self.t = sp.simplify(t)
+        self.x = sp.simplify(x)
+        self.y = sp.simplify(y)
+        self.z = sp.simplify(z)
+        return self
+    
+    def expand_q(self):
+        """Display each terms in a pretty way."""
+        
+        t, x, y, z = self.t, self.x, self.y, self.z
+        self.t = sp.expand(t)
+        self.x = sp.expand(x)
+        self.y = sp.expand(y)
+        self.z = sp.expand(z)
+        return self
+    
+    def equals(self, q1):
+        """See if two quaternions are equal."""
+        
+        self.expand_q().simple_q()
+        q1.expand_q().simple_q()
+        
+        equal = (self.t == q1.t) and (self.x == q1.x) and (self.y == q1.y) and (self.z == q1.z)
+        return equal
     
     def q_0(self, qtype="Zero"):
         """Return a zero quaternion."""
@@ -438,7 +458,7 @@ class QH(object):
 
 # Write tests the QH class.
 
-# In[ ]:
+# In[4]:
 
 
 class TestQH(unittest.TestCase):
@@ -451,6 +471,10 @@ class TestQH(unittest.TestCase):
     def test_qt(self):
         q1 = self.Q.dupe()
         self.assertTrue(q1.t == 1)
+        
+    def test_equals(self):
+        self.assertTrue(self.Q.equals(self.Q))
+        self.assertFalse(self.Q.equals(self.P))
 
     def test_q0(self):
         q1 = self.Q.dupe()
@@ -671,7 +695,7 @@ class TestQH(unittest.TestCase):
         QH([0, 0, 0, 0]).q_sin()
 
 
-# In[ ]:
+# In[5]:
 
 
 suite = unittest.TestLoader().loadTestsFromModule(TestQH())
@@ -680,7 +704,7 @@ unittest.TextTestRunner().run(suite);
 
 # My long term goal is to deal with quaternions on a quaternion manifold. This will have 4 pairs of doublets. Each doublet is paired with its additive inverse. Instead of using real numbers, one uses (3, 0) and (0, 2) to represent +3 and -2 respectively. Numbers such as (5, 6) are allowed. That can be "reduced" to (0, 1).  My sense is that somewhere deep in the depths of relativistic quantum field theory, this will be a "good thing". For now, it is a minor pain to program.
 
-# In[ ]:
+# In[6]:
 
 
 class Doublet(object):
@@ -793,7 +817,7 @@ class Doublet(object):
         return Doublet([p1, n1])
 
 
-# In[ ]:
+# In[7]:
 
 
 class TestDoublet(unittest.TestCase):
@@ -858,7 +882,7 @@ class TestDoublet(unittest.TestCase):
         self.assertTrue(Z2p_red.n == Z2p_2.n)
 
 
-# In[ ]:
+# In[8]:
 
 
 suite = unittest.TestLoader().loadTestsFromModule(TestDoublet())
@@ -867,7 +891,7 @@ unittest.TextTestRunner().run(suite);
 
 # Write a class to handle quaternions given 8 numbers.
 
-# In[ ]:
+# In[9]:
 
 
 class Q8(object):
@@ -906,6 +930,8 @@ class Q8(object):
             """Adds a qtype to an existing one."""
             
             self.qtype += "." + qtype
+            
+
             
     def q_zero(self, qtype="Zero"):
         """Return a zero quaternion."""
@@ -1031,6 +1057,15 @@ class Q8(object):
         
         q_red.add_qtype(qtype)
         return q_red
+    
+    def equals(self, q1):
+        """See if two quaternions are equal."""
+        
+        self.reduce()
+        q1.reduce()
+        
+        equal = (self.dt.p == q1.dt.p) and (self.dt.n == q1.dt.n) and (self.dx.p == q1.dx.p) and (self.dx.n == q1.dx.n) and (self.dy.p == q1.dy.p) and (self.dy.n == q1.dy.n) and (self.dz.p == q1.dz.p) and (self.dz.n == q1.dz.n)
+        return equal
     
     def norm_squared(self, qtype="norm_squared"):
         """The norm_squared of a quaternion."""
@@ -1221,7 +1256,7 @@ class Q8(object):
         return g_q
 
 
-# In[ ]:
+# In[10]:
 
 
 class TestQ8(unittest.TestCase):
@@ -1323,6 +1358,10 @@ class TestQ8(unittest.TestCase):
         self.assertTrue(q_red.dy.n == 1)
         self.assertTrue(q_red.dz.p == 0)
         self.assertTrue(q_red.dz.n == 1)
+        
+    def test_equals(self):
+        self.assertTrue(self.q1.equals(self.q1))
+        self.assertFalse(self.q1.equals(self.q2))
         
     def test_norm_squared(self):
         q_z = self.q1.norm_squared()
@@ -1493,7 +1532,7 @@ class TestQ8(unittest.TestCase):
         self.assertTrue(q_z2.dz.n == q1_sq.dz.n)
 
 
-# In[ ]:
+# In[11]:
 
 
 suite = unittest.TestLoader().loadTestsFromModule(TestQ8())
@@ -1509,7 +1548,7 @@ unittest.TextTestRunner().run(suite);
 # Such an exact relation is not of much interest to physicists since Einstein showed that holds for only one set of observers. If one is moving relative to the reference observer, the two events would look like they occured at different times in the future, presuming perfectly accurate measuring devices.
 # 
 
-# In[ ]:
+# In[12]:
 
 
 def round_sig_figs(num, sig_figs):
@@ -1523,7 +1562,7 @@ def round_sig_figs(num, sig_figs):
         return 0  # Can't take the log of 0
 
 
-# In[ ]:
+# In[13]:
 
 
 class EQ(object):
@@ -1847,7 +1886,7 @@ class EQ(object):
     
 
 
-# In[ ]:
+# In[14]:
 
 
 class TestEQ(unittest.TestCase):
@@ -1957,7 +1996,7 @@ class TestEQ(unittest.TestCase):
         self.assertTrue(eq_small_tiny.norm_squared_of_unity() == 'less_than_unity')
 
 
-# In[ ]:
+# In[15]:
 
 
 suite = unittest.TestLoader().loadTestsFromModule(TestEQ())
@@ -1966,7 +2005,7 @@ unittest.TextTestRunner().run(suite);
 
 # Create a class that can make many, many quaternions.
 
-# In[ ]:
+# In[16]:
 
 
 class QHArray(QH):
@@ -2039,7 +2078,7 @@ class QHArray(QH):
         return QH([new_t, new_x, new_y, new_z])
 
 
-# In[ ]:
+# In[17]:
 
 
 class TestQHArray(unittest.TestCase):
@@ -2067,14 +2106,14 @@ class TestQHArray(unittest.TestCase):
         self.assertTrue(self.qha.q_max.z > 13.9)
 
 
-# In[ ]:
+# In[18]:
 
 
 suite = unittest.TestLoader().loadTestsFromModule(TestQHArray())
 unittest.TextTestRunner().run(suite);
 
 
-# In[ ]:
+# In[19]:
 
 
 qha = QHArray()
@@ -2086,7 +2125,7 @@ ql=list(qha.range(t1,qd,10))
 print(ql[0])
 
 
-# In[ ]:
+# In[20]:
 
 
 T, X, Y, Z = sp.symbols('T X Y Z')
@@ -2102,7 +2141,7 @@ for q in qha.range(t1,qd,10):
     print(qha.symbol_sub(qabstract, q))
 
 
-# In[ ]:
+# In[21]:
 
 
 T, X, Y, Z = sp.symbols('T X Y Z')
@@ -2116,7 +2155,7 @@ print(qabstract.z.subs(T,1.0).subs(X,1).subs(Y,2).subs(Z,3))
 
 # So I can make a long list of quaternions. I can make an abstract function and fill that with this list of quaternions. Now I need to sort the quaternions by time
 
-# In[ ]:
+# In[22]:
 
 
 
@@ -2131,21 +2170,21 @@ print(eq_E12)
 eq_E12.visualize()
 
 
-# In[ ]:
+# In[23]:
 
 
 print(eq_E13)
 eq_E13.visualize()
 
 
-# In[ ]:
+# In[24]:
 
 
 print(eq_E23)
 eq_E23.visualize()
 
 
-# In[ ]:
+# In[25]:
 
 
 q12 = Q8([1,2,0,0,0,0,0,0])
@@ -2159,7 +2198,7 @@ print(q1221n2)
 print(q1221n2.reduce())
 
 
-# In[ ]:
+# In[26]:
 
 
 Q12 = QH([1, 2,0, 0, 0, 0, 0,0])
@@ -2168,7 +2207,7 @@ Q1221 = Q12.product(Q12inv)
 print(Q1221)
 
 
-# In[ ]:
+# In[27]:
 
 
 q12 = Q8([1,2,0,0,0,0,0,0])
@@ -2178,7 +2217,7 @@ print(q12.invert())
 print(qcrazy.product(qcrazy.invert()).reduce())
 
 
-# In[ ]:
+# In[28]:
 
 
 print(q12)
@@ -2187,13 +2226,13 @@ print(q12.product(q12.invert()))
 print(q12.product(q12.invert()).norm_squared())
 
 
-# In[ ]:
+# In[29]:
 
 
 print(qcrazy.product(qcrazy.invert()).reduce())
 
 
-# In[ ]:
+# In[30]:
 
 
 print(qcrazy.norm_squared())
@@ -2201,7 +2240,7 @@ print(qcrazy.invert().norm_squared())
 print(q12.norm_squared().product(qcrazy.invert().norm_squared()))
 
 
-# In[ ]:
+# In[31]:
 
 
 d12 = Doublet([1,2])
@@ -2209,7 +2248,7 @@ d12.Z2_product(d12)
 print("{} {}".format(d12.p, d12.n))
 
 
-# In[ ]:
+# In[32]:
 
 
 
@@ -2218,7 +2257,7 @@ qi = Q8([0,1,0,0])
 print(qi.product(qa).product(qi).conj())
 
 
-# In[ ]:
+# In[33]:
 
 
 q1n=Q8([-1,0,0,0])
@@ -2227,7 +2266,7 @@ print(qa.conj().conj(2).conj(1).product(q1n))
 print(qa.conj(2).conj(1).conj().product(q1n))
 
 
-# In[ ]:
+# In[34]:
 
 
 qa = QH([1,2,3,4])
@@ -2236,7 +2275,7 @@ print(qa.vahlen_conj("'"))
 print(qa.vahlen_conj("*"))
 
 
-# In[ ]:
+# In[35]:
 
 
 print(qa)
