@@ -94,16 +94,31 @@ class QH(object):
         self.z = sp.simplify(self.z)
         return
     
-    def q_0(self, qtype="Zero"):
+    def q_0(self, qtype="0"):
         """Return a zero quaternion."""
 
         return QH([0, 0, 0, 0], qtype=qtype)
 
-    def q_1(self, qtype="One"):
+    def q_1(self, qtype="1"):
         """Return a multiplicative identity quaternion."""
 
         return QH([1, 0, 0, 0], qtype=qtype)
     
+    def q_i(self, qtype="i"):
+        """Return i."""
+
+        return QH([0, 1, 0, 0], qtype=qtype)
+    
+    def q_j(self, qtype="j"):
+        """Return j."""
+
+        return QH([0, 0, 1, 0], qtype=qtype)
+    
+    def q_k(self, qtype="k"):
+        """Return k."""
+
+        return QH([0, 0, 0, 1], qtype=qtype)
+
     def dupe(self, qtype=""):
         """Return a duplicate copy, good for testing since qtypes persist"""
         
@@ -507,23 +522,50 @@ class TestQH(unittest.TestCase):
         q1 = self.Q.dupe()
         self.assertTrue(q1.t == 1)
 
-    def test_q0(self):
+    def test_q_0(self):
         q1 = self.Q.dupe()
         q_z = q1.q_0()
-        if self.verbose: print("q0: {}".format(q_z))
+        if self.verbose: print("q_0: {}".format(q_z))
         self.assertTrue(q_z.t == 0)
         self.assertTrue(q_z.x == 0)
         self.assertTrue(q_z.y == 0)
         self.assertTrue(q_z.z == 0)
 
-    def test_q1(self):
+    def test_q_1(self):
         q1 = self.Q.dupe()
         q_z = q1.q_1()
-        if self.verbose: print("q1: {}".format(q_z))
+        if self.verbose: print("q_1: {}".format(q_z))
         self.assertTrue(q_z.t == 1)
         self.assertTrue(q_z.x == 0)
         self.assertTrue(q_z.y == 0)
         self.assertTrue(q_z.z == 0)
+
+    def test_q_i(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_i()
+        if self.verbose: print("q_i: {}".format(q_z))
+        self.assertTrue(q_z.t == 0)
+        self.assertTrue(q_z.x == 1)
+        self.assertTrue(q_z.y == 0)
+        self.assertTrue(q_z.z == 0)
+
+    def test_q_j(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_j()
+        if self.verbose: print("q_j: {}".format(q_z))
+        self.assertTrue(q_z.t == 0)
+        self.assertTrue(q_z.x == 0)
+        self.assertTrue(q_z.y == 1)
+        self.assertTrue(q_z.z == 0)
+
+    def test_q_k(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_k()
+        if self.verbose: print("q_k: {}".format(q_z))
+        self.assertTrue(q_z.t == 0)
+        self.assertTrue(q_z.x == 0)
+        self.assertTrue(q_z.y == 0)
+        self.assertTrue(q_z.z == 1)
 
     def test_conj_0(self):
         q1 = self.Q.dupe()
@@ -822,16 +864,31 @@ class QHa(object):
         self.a[3] = sp.simplify(self.a[3])
         return
     
-    def q_0(self, qtype="Zero"):
+    def q_0(self, qtype="0"):
         """Return a zero quaternion."""
 
         return QHa([0.0, 0.0, 0.0, 0.0], qtype=qtype)
 
-    def q_1(self, qtype="One"):
+    def q_1(self, qtype="1"):
         """Return a multiplicative identity quaternion."""
 
         return QHa([1.0, 0.0, 0.0, 0.0], qtype=qtype)
     
+    def q_i(self, qtype="i"):
+        """Return i."""
+
+        return QHa([0.0, 1.0, 0.0, 0.0], qtype=qtype)
+
+    def q_j(self, qtype="j"):
+        """Return j."""
+
+        return QHa([0.0, 0.0, 1.0, 0.0], qtype=qtype)
+    
+    def q_k(self, qtype="k"):
+        """Return k."""
+
+        return QHa([0.0, 0.0, 0.0, 1.0], qtype=qtype)
+
     def dupe(self, qtype=""):
         """Return a duplicate copy, good for testing since qtypes persist"""
         
@@ -1233,23 +1290,50 @@ class TestQHa(unittest.TestCase):
         q1 = self.Q.dupe()
         self.assertTrue(q1.a[0] == 1)
 
-    def test_q0(self):
+    def test_q_0(self):
         q1 = self.Q.dupe()
         q_z = q1.q_0()
-        if self.verbose: print("q0: {}".format(q_z))
+        if self.verbose: print("q_0: {}".format(q_z))
         self.assertTrue(q_z.a[0] == 0)
         self.assertTrue(q_z.a[1] == 0)
         self.assertTrue(q_z.a[2] == 0)
         self.assertTrue(q_z.a[3] == 0)
 
-    def test_q1(self):
+    def test_q_1(self):
         q1 = self.Q.dupe()
         q_z = q1.q_1()
-        if self.verbose: print("q1: {}".format(q_z))
+        if self.verbose: print("q_1: {}".format(q_z))
         self.assertTrue(q_z.a[0] == 1)
         self.assertTrue(q_z.a[1] == 0)
         self.assertTrue(q_z.a[2] == 0)
         self.assertTrue(q_z.a[3] == 0)
+    
+    def test_q_i(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_i()
+        if self.verbose: print("q_i: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[1] == 1)
+        self.assertTrue(q_z.a[2] == 0)
+        self.assertTrue(q_z.a[3] == 0)
+
+    def test_q_j(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_j()
+        if self.verbose: print("q_1: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[1] == 0)
+        self.assertTrue(q_z.a[2] == 1)
+        self.assertTrue(q_z.a[3] == 0)
+
+    def test_q_k(self):
+        q1 = self.Q.dupe()
+        q_z = q1.q_k()
+        if self.verbose: print("q_k: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[1] == 0)
+        self.assertTrue(q_z.a[2] == 0)
+        self.assertTrue(q_z.a[3] == 1)
 
     def test_conj_0(self):
         q1 = self.Q.dupe()
@@ -1905,15 +1989,30 @@ class Q8(object):
             
             self.qtype += "." + qtype
             
-    def q_zero(self, qtype="Zero"):
+    def q_0(self, qtype="0"):
         """Return a zero quaternion."""
         
         return Q8()
       
-    def q_one(self, qtype="One"):
+    def q_1(self, qtype="1"):
         """Return a multiplicative identity quaternion."""
         
         return Q8([1, 0, 0, 0])
+    
+    def q_i(self, qtype="i"):
+        """Return i."""
+        
+        return Q8([0, 1, 0, 0])
+    
+    def q_j(self, qtype="j"):
+        """Return j."""
+        
+        return Q8([0, 0, 1, 0])
+    
+    def q_k(self, qtype="k"):
+        """Return k."""
+        
+        return Q8([0, 0, 0, 1])
     
     def conj(self, conj_type=0, qtype="*"):
         """Three types of conjugates."""
@@ -2263,22 +2362,46 @@ class TestQ8(unittest.TestCase):
     def test_qt(self):
         self.assertTrue(self.q1.dt.p == 1)
     
-    def test_q_zero(self):
-        q_z = self.q1.q_zero()
-        if self.verbose: print("q0: {}".format(q_z))
+    def test_q_0(self):
+        q_z = self.q1.q_0()
+        if self.verbose: print("q_0: {}".format(q_z))
         self.assertTrue(q_z.dt.p == 0)
         self.assertTrue(q_z.dx.p == 0)
         self.assertTrue(q_z.dy.n == 0)
         self.assertTrue(q_z.dz.p == 0)
         
-    def test_q_one(self):
-        q_z = self.q1.q_one()
-        if self.verbose: print("q1: {}".format(q_z))
+    def test_q_1(self):
+        q_z = self.q1.q_1()
+        if self.verbose: print("q_1: {}".format(q_z))
         self.assertTrue(q_z.dt.p == 1)
         self.assertTrue(q_z.dx.p == 0)
         self.assertTrue(q_z.dy.p == 0)
         self.assertTrue(q_z.dz.p == 0)
+        
+    def test_q_i(self):
+        q_z = self.q1.q_i()
+        if self.verbose: print("q_i: {}".format(q_z))
+        self.assertTrue(q_z.dt.p == 0)
+        self.assertTrue(q_z.dx.p == 1)
+        self.assertTrue(q_z.dy.p == 0)
+        self.assertTrue(q_z.dz.p == 0)
+        
+    def test_q_j(self):
+        q_z = self.q1.q_j()
+        if self.verbose: print("q_j: {}".format(q_z))
+        self.assertTrue(q_z.dt.p == 0)
+        self.assertTrue(q_z.dx.p == 0)
+        self.assertTrue(q_z.dy.p == 1)
+        self.assertTrue(q_z.dz.p == 0)
                 
+    def test_q_k(self):
+        q_z = self.q1.q_k()
+        if self.verbose: print("q_k: {}".format(q_z))
+        self.assertTrue(q_z.dt.p == 0)
+        self.assertTrue(q_z.dx.p == 0)
+        self.assertTrue(q_z.dy.p == 0)
+        self.assertTrue(q_z.dz.p == 1)
+
     def test_conj_0(self):
         q_z = self.q1.conj()
         if self.verbose: print("conj 0: {}".format(q_z))
@@ -2620,16 +2743,32 @@ class Q8a(object):
             
             self.qtype += "." + qtype
             
-    def q_zero(self, qtype="Zero"):
+    def q_0(self, qtype="0"):
         """Return a zero quaternion."""
         
         return Q8a()
       
-    def q_one(self, qtype="One"):
+    def q_1(self, qtype="1"):
         """Return a multiplicative identity quaternion."""
         
         return Q8a([1, 0, 0, 0, 0, 0, 0, 0])
     
+    def q_i(self, qtype="i"):
+        """Return i."""
+        
+        return Q8a([0, 0, 1, 0, 0, 0, 0, 0])
+    
+    def q_j(self, qtype="One"):
+        """Return j."""
+        
+        return Q8a([0, 0, 0, 0, 1, 0, 0, 0])
+    
+
+    def q_k(self, qtype="k"):
+        """Return k."""
+        
+        return Q8a([0, 0, 0, 0, 0, 0, 1, 0])
+
     def conj(self, conj_type=0, qtype="*"):
         """Three types of conjugates."""
         
@@ -3068,20 +3207,44 @@ class TestQ8a(unittest.TestCase):
         self.assertTrue(self.q1.a[0] == 1)
     
     def test_q_zero(self):
-        q_z = self.q1.q_zero()
+        q_z = self.q1.q_0()
         if self.verbose: print("q0: {}".format(q_z))
         self.assertTrue(q_z.a[0] == 0)
         self.assertTrue(q_z.a[2] == 0)
         self.assertTrue(q_z.a[5] == 0)
         self.assertTrue(q_z.a[6] == 0)
         
-    def test_q_one(self):
-        q_z = self.q1.q_one()
-        if self.verbose: print("q1: {}".format(q_z))
+    def test_q_1(self):
+        q_z = self.q1.q_1()
+        if self.verbose: print("q_1: {}".format(q_z))
         self.assertTrue(q_z.a[0] == 1)
         self.assertTrue(q_z.a[2] == 0)
         self.assertTrue(q_z.a[4] == 0)
         self.assertTrue(q_z.a[6] == 0)
+        
+    def test_q_i(self):
+        q_z = self.q1.q_i()
+        if self.verbose: print("q_i: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[2] == 1)
+        self.assertTrue(q_z.a[4] == 0)
+        self.assertTrue(q_z.a[6] == 0)
+        
+    def test_q_j(self):
+        q_z = self.q1.q_j()
+        if self.verbose: print("q_j: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[2] == 0)
+        self.assertTrue(q_z.a[4] == 1)
+        self.assertTrue(q_z.a[6] == 0)
+    
+    def test_q_k(self):
+        q_z = self.q1.q_k()
+        if self.verbose: print("q_k: {}".format(q_z))
+        self.assertTrue(q_z.a[0] == 0)
+        self.assertTrue(q_z.a[2] == 0)
+        self.assertTrue(q_z.a[4] == 0)
+        self.assertTrue(q_z.a[6] == 1)
                 
     def test_conj_0(self):
         q_z = self.q1.conj()
@@ -3432,8 +3595,8 @@ class EQ(object):
         self.q1_square = self.q1.square().reduce()
         self.q2_square = self.q2.square().reduce()
         
-        self.q1_norm_squared_minus_1 = self.q1.norm_squared().dif(self.q1.q_one()).reduce()
-        self.q2_norm_squared_minus_1 = self.q2.norm_squared().dif(self.q1.q_one()).reduce()
+        self.q1_norm_squared_minus_1 = self.q1.norm_squared().dif(self.q1.q_1()).reduce()
+        self.q2_norm_squared_minus_1 = self.q2.norm_squared().dif(self.q1.q_1()).reduce()
 
         # Store results here
         self.classes = {}
@@ -3813,16 +3976,16 @@ class TestEQ(unittest.TestCase):
 
     def test_norm_squared_of_unity(self):
         self.assertTrue(self.eq_11.norm_squared_of_unity() == 'greater_than_unity_exact')
-        q_one = Q8([1, 0, 0, 0, 0, 0, 0, 0])
+        q_1 = Q8([1, 0, 0, 0, 0, 0, 0, 0])
         q_small = Q8([0.1, 0, 0, 0.2, 0, 0, 0, 0])
         q_tiny = Q8([0.001, 0, 0, 0.002, 0, 0, 0, 0])
 
-        eq_one = EQ(q_one, q_one)
-        eq_q1_small = EQ(q_one, q_small)
+        eq_1 = EQ(q_1, q_1)
+        eq_q1_small = EQ(q_1, q_small)
         eq_small_small = EQ(q_small, q_small)
         eq_small_tiny = EQ(q_small, q_tiny)
         
-        self.assertTrue(eq_one.norm_squared_of_unity() == 'unity_exact')
+        self.assertTrue(eq_1.norm_squared_of_unity() == 'unity_exact')
         self.assertTrue(eq_q1_small.norm_squared_of_unity() == 'disjoint')
         self.assertTrue(eq_small_small.norm_squared_of_unity() == 'less_than_unity_exact')
         self.assertTrue(eq_small_tiny.norm_squared_of_unity() == 'less_than_unity')
