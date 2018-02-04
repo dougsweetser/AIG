@@ -11806,7 +11806,7 @@ printing.init_printing(use_latex=True)
 from IPython.display import display
 
 # Tools for manipulating quaternions.
-import Q_tool_devo as qtd;
+import Q_tools as qt;
 </pre></div>
 
 </div>
@@ -11828,9 +11828,9 @@ import Q_tool_devo as qtd;
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qha</span> <span class="o">=</span> <span class="n">qtd</span><span class="o">.</span><span class="n">QHArray</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qha</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHArray</span><span class="p">()</span>
 
-<span class="n">qDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qha</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">q_start</span><span class="o">=</span><span class="n">qtd</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">q_delta</span><span class="o">=</span><span class="n">qtd</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]),</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">qDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qha</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">q_start</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">q_delta</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]),</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
 <span class="n">qDf</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
@@ -11869,6 +11869,73 @@ import Q_tool_devo as qtd;
     <tr>
       <th>1000</th>
       <td>(1000, 99.9999999999986, 199.9999999999972, 30...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Need to check if Panda wants array format for data</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qha</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHaArray</span><span class="p">()</span>
+
+<span class="n">qDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qha</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">q_start</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">QHa</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">q_delta</span><span class="o">=</span><span class="n">qt</span><span class="o">.</span><span class="n">QHa</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]),</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">qDf</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>998</th>
+      <td>(998.0, 99.7999999999986, 199.5999999999972, 2...</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>(999.0, 99.8999999999986, 199.7999999999972, 2...</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>(1000.0, 99.9999999999986, 199.9999999999972, ...</td>
     </tr>
   </tbody>
 </table>
