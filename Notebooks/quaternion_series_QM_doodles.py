@@ -54,4 +54,8 @@ print(qt.QHStates().product(bra=A, ket=B))
 print(qt.QHStates().product(bra=A, ket=B, operator=Op))
 
 
-# I was able to confirm this result was correct. In general though, this
+# I was able to confirm this result was correct. In general though, this stuff is going to get insanely complicated quickly.
+
+# ## Bonus Problem
+
+# See if you can write out an operator that is Hermitian. I have a very specific guess in mind, but have yet to try it.
