@@ -99,9 +99,22 @@ print("Sum <A|VVc|A>:\n", qt.QHStates().Euclidean_product(bra=A, ket=A, operator
 
 
 q0 = qt.QH().q_0()
+q1 = qt.QH().q_1()
 UVWc = qt.QHStates([q0, U, V, U.conj(), q0, W, V.conj(), W.conj(), q0])
 print("<B|UVWc|B>:\n", qt.QHStates().Euclidean_product(bra=B, ket=B, operator=UVWc))
 print("Sum <A|UVW|A>:\n", qt.QHStates().Euclidean_product(bra=B, ket=B, operator=UVWc).summation())
 
 
-# Bingo, bingo! The "uneven" cancellations are kind of impressive.
+# Bingo, bingo! The "uneven" cancellations are kind of impressive. Can one put non-zero values along the diagonal?
+
+# In[9]:
+
+
+q3 = qt.QH([-3,0,0,0])
+q2 = qt.QH([2,0,0,0])
+UVWc = qt.QHStates([q3, U, V, U.conj(), q1, W, V.conj(), W.conj(), q2])
+print("<B|UVWc|B>:\n", qt.QHStates().Euclidean_product(bra=B, ket=B, operator=UVWc))
+print("Sum <A|UVW|A>:\n", qt.QHStates().Euclidean_product(bra=B, ket=B, operator=UVWc).summation())
+
+
+# So one can put whatever real valued quaternions down the diagonal.

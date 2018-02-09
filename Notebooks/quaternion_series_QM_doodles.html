@@ -12149,6 +12149,7 @@ Sum &lt;A|VVc|A&gt;:
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">q0</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">()</span><span class="o">.</span><span class="n">q_0</span><span class="p">()</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">()</span><span class="o">.</span><span class="n">q_1</span><span class="p">()</span>
 <span class="n">UVWc</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">([</span><span class="n">q0</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">q0</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">W</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">q0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;B|UVWc|B&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="n">UVWc</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum &lt;A|UVW|A&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="n">UVWc</span><span class="p">)</span><span class="o">.</span><span class="n">summation</span><span class="p">())</span>
@@ -12186,7 +12187,56 @@ Sum &lt;A|UVW|A&gt;:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Bingo, bingo! The "uneven" cancellations are kind of impressive.</p>
+<p>Bingo, bingo! The "uneven" cancellations are kind of impressive. Can one put non-zero values along the diagonal?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q3</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QH</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">UVWc</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">([</span><span class="n">q3</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">U</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">q1</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">W</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">q2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;B|UVWc|B&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="n">UVWc</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum &lt;A|UVW|A&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="n">UVWc</span><span class="p">)</span><span class="o">.</span><span class="n">summation</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;B|UVWc|B&gt;:
+ n=1: (-1, -2, 5, 18) Q.*x0+QxQ+UxQ+VxQ
+n=2: (30, 8, -20, -24) Q.*x0+U.*xQ+1xQ+WxQ
+n=3: (54, -6, 15, 6) Q.*x0+V.*xQ+W.*xQ+QxQ
+Sum &lt;A|UVW|A&gt;:
+ (83, 0, 0, 0) Q+Q.*x0+QxQ+UxQ+VxQ+Q.*x0+U.*xQ+1xQ+WxQ+Q.*x0+V.*xQ+W.*xQ+QxQ
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So one can put whatever real valued quaternions down the diagonal.</p>
 
 </div>
 </div>
