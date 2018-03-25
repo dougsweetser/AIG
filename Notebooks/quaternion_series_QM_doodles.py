@@ -65,8 +65,8 @@ print(qt.QHStates().product(bra=A, ket=B, operator=Op))
 # In[5]:
 
 
-print("<A|A>:\n", qt.QHStates().product(bra=A, ket=A))
-print("Sum of <A|A>: ", qt.QHStates().product(bra=A, ket=A).summation())
+print("<A|A>:\n", qt.QHStates().Euclidean_product(bra=A, ket=A))
+print("Sum of <A|A>: ", qt.QHStates().Euclidean_product(bra=A, ket=A).summation())
 
 
 # What kind of operator might shift these values while still keeping it all "real"? My guess is a "Hermitian" series. This has to be square the size of the series squared. What is on the diagonal should not matter. The off the diagonal must have its conjugate in the right place on the other size. Test this guess with a few big quaternions:

@@ -12008,8 +12008,8 @@ n=2: (3, -12, -4, 0) Qx0+QxQ+QxQ+QxQ
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;A|A&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">A</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of &lt;A|A&gt;: &quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">summation</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;A|A&gt;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of &lt;A|A&gt;: &quot;</span><span class="p">,</span> <span class="n">qt</span><span class="o">.</span><span class="n">QHStates</span><span class="p">()</span><span class="o">.</span><span class="n">Euclidean_product</span><span class="p">(</span><span class="n">bra</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">summation</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12027,9 +12027,9 @@ n=2: (3, -12, -4, 0) Qx0+QxQ+QxQ+QxQ
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;A|A&gt;:
- n=1: (16, 0, 0, 0) QxQ
-n=2: (-1, 0, 0, 0) QxQ
-Sum of &lt;A|A&gt;:  (15, 0, 0, 0) Q+QxQ+QxQ
+ n=1: (16, 0, 0, 0) Q.*xQ
+n=2: (1, 0, 0, 0) Q.*xQ
+Sum of &lt;A|A&gt;:  (17, 0, 0, 0) Q+Q.*xQ+Q.*xQ
 </pre>
 </div>
 </div>
